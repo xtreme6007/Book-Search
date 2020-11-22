@@ -10,3 +10,6 @@ let book = new Schema({
     link: {type: String}
 
 })
+const Book = mongoose.model("Book", bookSchema);
+
+module.exports = Book;
