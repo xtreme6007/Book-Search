@@ -1,18 +1,37 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import { HashRouter, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import SearchPage from './Pages/Search.js'
 import "./App.css";
+import Navigation from './Components/Nav/'
+import Container from 'react-bootstrap/Container'
+import SearchBar from './Components/SearchBar'
+import SavedPage from './Pages/Saved.js'
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+       <HashRouter basename='/'>
+
+<Navigation />
+<SearchBar />
+
+
+<div className="mb-5">
+
+  <Switch>
+  
+  <Route exact path="/" component={SearchPage} />
+  <Route exact path="/Saved" component={SavedPage} />
+ 
+  </Switch>
+
+</div>
+</HashRouter>
+        
       </div>
     );
   }
