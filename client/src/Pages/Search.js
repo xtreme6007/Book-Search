@@ -12,8 +12,10 @@ function SearchPage() {
     function Search(query) {
         API.getBooks(query).then(res => {
             console.log(res.data.items);
+            console.log(resultState)
             setResultState({
-                result: res.data.items
+                resultState: res.data.items
+                
                 
             })
         })
@@ -32,21 +34,22 @@ function SearchPage() {
     return (
     <div>
         <SearchBar handleSearchChange={handleSearchChange}/>
-    
+    <div>
         {resultState.length > 0 ? (resultState.map(book => {
+            console.log("Theres something")
 
             return (
                 <div>
-                {book.volumeInfo.title}
+                <h1>{book.volumeInfo.title}</h1>
                 {book.volumeInfo.authours}
                 {book.volumeInfo.description}
                 {book.imageLinks.thumbnail}
-                {book.infolLink}
+                {book.infoLink}          
                 </div>
             )
-        })): (<div></div>)}
+        })) : (<div></div>)}
 
-
+</div>
     </div>
     )
 
