@@ -5,12 +5,11 @@ const BaseUrl = "https://www.googleapis.com/books/v1/volumes?q="
 
 
 
-const API = (query) => {
-  getBooks:  {
+export default {
+  getBooks: function (query) {
     return axios.get
-    (BaseUrl+ query)
-    
+    (BaseUrl+ query);  
   }
   
 };
-export default API
+
