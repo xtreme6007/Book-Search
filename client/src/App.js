@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Switch } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -9,8 +9,8 @@ import Navigation from './Components/Nav/'
 import SavedPage from './Pages/Saved.js'
 
 
-class App extends Component {
-  render() {
+function App () {
+  
     return (
       <div>
         <Router basename='/'>
@@ -33,7 +33,7 @@ class App extends Component {
 
       </div>
     );
-  }
+ 
 }
 
 export default App;
