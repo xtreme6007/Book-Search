@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react'
+import React, { Component } from 'react'
 
 import SearchBar from '../Components/SearchBar'
 import API from '../utils/API'
@@ -7,39 +7,53 @@ import API from '../utils/API'
 
 
 class SearchPage extends Component {
+     
 
-    render() {
+    state ={
+        result: [],
+        query: "Welcome"
 
-        const [resultState, setResultState] = useState([]);
+    }
+    componentDidMount() {
+        this.Search(this.state.query)
+      }
 
-        const Search = (query) => {
+   
+
+        Search(query){
             API.getBooks(query).then(res => {
-                console.log(res.data.items);
-                console.log(resultState)
-                setResultState(
-                    { resultState: res.data.items }
+                console.log(this.state.query);
+                console.log(this.state.result);
+                console.log(res.data.items)
+                
+                this.setState(
+                    { result: res.data.items }
                 )
             })
 
         }
 
-        const handleSearchChange = (event) => {
+         handleSearchChange = (event) => {
 
-            let query = event.target.value
-            Search(query);
+             this.setState( {...this.state, query: event.target.value}) 
+             this.Search(this.state.query)
 
 
 
         }
+
+    render() {
+
+        
 
 
 
 
         return (
             <div>
-                <SearchBar handleSearchChange={handleSearchChange} />
+                <SearchBar handleSearchChange={this.handleSearchChange} />
                 <div>
-                    {resultState.length > 0 ? (resultState.map(book => {
+                    {this.state.result.length > 0 ? (this.state.result.map(book => {
                         console.log("Theres something")
 
                         return (
@@ -51,7 +65,9 @@ class SearchPage extends Component {
                                 {book.infoLink}
                             </div>
                         )
-                    })) : (<div></div>)}
+                    })) : (<div>
+                        <h1>No results yet! Keep trying though!</h1>
+                    </div>)}
 
                 </div>
             </div>
