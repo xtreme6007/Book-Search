@@ -12,7 +12,7 @@ function SearchBar({ handleSearchChange }) {
     <div>
       <Form>
         <Form.Group>
-          <Form.Label htmlfor="QuerySearch">Search:</Form.Label>
+          <Form.Label htmlFor="QuerySearch">Search:</Form.Label>
           <Form.Control
             as="input"
             id="querrySearch"

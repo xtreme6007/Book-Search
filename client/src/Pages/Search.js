@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import SearchBar from '../Components/SearchBar'
 import API from '../utils/API'
+import Button from 'react-bootstrap/Button'
 
 
 
@@ -23,21 +24,32 @@ class SearchPage extends Component {
         Search(query){
             API.getBooks(query).then(res => {
                 console.log(this.state.query);
-                console.log(this.state.result);
+                
                 console.log(res.data.items)
                 
                 this.setState(
-                    { result: res.data.items }
+                    { result: [...res.data.items] }
                 )
+                console.log(this.state.result);
             })
 
         }
 
          handleSearchChange = (event) => {
 
-             this.setState( {...this.state, query: event.target.value}) 
-             this.Search(this.state.query)
+             this.setState( { query: event.target.value}) 
+             
 
+
+
+        }
+
+        ButtonClick = () => {
+            this.Search(this.state.query)
+        }
+
+
+        save = () =>{
 
 
         }
@@ -51,18 +63,20 @@ class SearchPage extends Component {
 
         return (
             <div>
-                <SearchBar handleSearchChange={this.handleSearchChange} />
+                <SearchBar  handleSearchChange={this.handleSearchChange}/>
+                <Button onClick={this.ButtonClick}>Search</Button>
                 <div>
                     {this.state.result.length > 0 ? (this.state.result.map(book => {
-                        console.log("Theres something")
+                        console.log(book.volumeInfo.title)
 
                         return (
-                            <div>
+                            <div key={book.id}>
                                 <h1>{book.volumeInfo.title}</h1>
-                                {book.volumeInfo.authours}
-                                {book.volumeInfo.description}
-                                {book.imageLinks.thumbnail}
-                                {book.infoLink}
+                                <p>{book.volumeInfo.authours}</p>
+                                <p>{book.volumeInfo.description}</p>
+                                <p>{book.volumeInfo.imageLinks.thumbnail}</p>
+                                <p><a href={book.infoLink}>{book.infoLink}</a></p>
+                                <Button onClick={this.Save}>Save</Button>
                             </div>
                         )
                     })) : (<div>
