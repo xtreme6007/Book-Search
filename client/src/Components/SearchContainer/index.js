@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
+import Container from "react-bootstrap/Container"
 
 // this will be used to hold search bar and buttons
 
-function SearchContainer(){
+class SearchContainer extends Component {
 
-
+render(){
     return(
-        <div>
+        <Container className="mb-3 SearchContainer">
             
 
 
-        </div>
+        </Container>
 
     )
 
-
+    }
 
 
 }
