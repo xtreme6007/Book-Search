@@ -48,12 +48,8 @@ class SearchPage extends Component {
             this.Search(this.state.query)
         }
 
+        Save = (res) => {
 
-        Save = (e) =>{
-            e.preventDefault();
-           
-
-             API.findBooks(e.target.id).then(res => { 
             API.saveBook(
                 {  id: res.data.id,
                     title: res.data.volumeInfo.title,
@@ -61,8 +57,18 @@ class SearchPage extends Component {
                     description: res.data.volumeInfo.description
                     
                 }
-
             )
+        }
+
+
+        Find = (e) =>{
+            e.preventDefault();
+           
+
+             API.findBooks(e.target.id).then(res => { 
+            
+                this.Save(res);
+            
                 
         })
         }
@@ -91,7 +97,7 @@ class SearchPage extends Component {
                                 <p>Description: {book.volumeInfo.description}</p>
                                 
                                 <p>Check this book out <a href={book.volumeInfo.infoLink}>here</a>!</p>
-                                <Button onClick={this.Save} id={book.id}>Save</Button>
+                                <Button onClick={this.Find} id={book.id}>Save</Button>
                             </div>
                         )
                     })) : (<div>
