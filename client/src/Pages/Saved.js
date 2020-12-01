@@ -40,10 +40,10 @@ class SavedPage extends Component {
                         <div key={book.id} className="BookCard mb-3 ml-auto mr-auto">
                             <h1><img height="150px" width="100px" alt={book.title + "cover thumbnial"} src={book.thumbnail} />{book.title}</h1>
                             <p className="ml-auto mr-auto">Authors:{book.author}</p>
-                            <p>Description: {book.description}</p>
+                            <p>{book.description}</p> 
 
                             {/* <p>Check this book out <a href={book.link}>here</a>!</p> */}
-                            <Button onClick={this.delete} id= {book.id} variant="danger">X</Button>
+                            <Button onClick={this.delete} id={book.id} variant="danger">X</Button>
     </div>
 )
 })) : (<div>
