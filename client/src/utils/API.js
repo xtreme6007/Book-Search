@@ -17,6 +17,9 @@ export default {
     const FindUrl = "https://www.googleapis.com/books/v1/volumes/" + id +"?apikey=AIzaSyCYK1IWf_G-d3M_wlYMwE1LM-YE4ZjeWH8"
    
     return axios.get(FindUrl);
+  },
+  getSavedBooks: function () {
+    return axios.get("/api/books")
   }
   
 };
