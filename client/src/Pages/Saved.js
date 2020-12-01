@@ -1,48 +1,59 @@
-import React, {Component} from 'react'
-import API from '../utils/API'
+import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
+import API from '../utils/API'
 
 
 
 class SavedPage extends Component {
-state = {
-    SavedBooks: []
-}
-componentDidMount = () => {
-    API.getSavedBooks().then(res => {
-        // this.setState({SavedBooks: res.data})
-        console.log(res.data)
-    
-    
-    })
-    console.log(this.state.SavedBooks)
-}
+    state = {
+        SavedBooks: []
+    }
+    componentDidMount = () => {
+       this.loadBooks();
+        // console.log(this.state.SavedBooks)
+    }
 
-render(){
-    return (
-    <div>
-         {this.state.SavedBooks.length > 0 ? (this.state.SavedBooks.map(book => {
+    loadBooks = () => {
+
+        API.getSavedBooks().then(res => {
+            this.setState({ SavedBooks: res.data })
+            console.log(this.state.SavedBooks)
 
 
-return (
+        })
+    }
+     delete = (e) => {
+        
+        API.deleteBook(e.target.id)
+          .then(res => this.loadBooks())
+          .catch(err => console.log(err));
+      }
 
-    <div key={book.id} className="BookCard mb-3 ml-auto mr-auto">
-        <h1><img height="150px" width="100px" alt={book.title + "cover thumbnial"} src={book.imageLinks.thumbnail} />{book.title}</h1>
-        <p className="ml-auto mr-auto">Authors:{book.author}</p>
-        <p>Description: {book.description}</p>
+    render() {
+        return (
+            <div>
+                {this.state.SavedBooks.length > 0 ? (this.state.SavedBooks.map(book => {
 
-        {/* <p>Check this book out <a href={book.volumeInfo.infoLink}>here</a>!</p> */}
-        <Button onClick={this.Find} id={book.id}>Save</Button>
+
+                    return (
+
+                        <div key={book.id} className="BookCard mb-3 ml-auto mr-auto">
+                            <h1><img height="150px" width="100px" alt={book.title + "cover thumbnial"} src={book.thumbnail} />{book.title}</h1>
+                            <p className="ml-auto mr-auto">Authors:{book.author}</p>
+                            <p>Description: {book.description}</p>
+
+                            {/* <p>Check this book out <a href={book.link}>here</a>!</p> */}
+                            <Button onClick={this.delete} id= {book.id} variant="danger">X</Button>
     </div>
 )
 })) : (<div>
-<h1>No results yet! Keep trying though!</h1>
-</div>)}
+                                <h1>No results yet! Keep trying though!</h1>
+                            </div>)}
 
 
-    </div>
-    )
-    }
+                        </div>
+                    )
+                }
 
 
 }
