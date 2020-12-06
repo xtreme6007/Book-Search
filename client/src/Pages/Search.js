@@ -14,11 +14,11 @@ class SearchPage extends Component {
 
     state = {
         result: [],
-        query: "Preston Nichols"
+        query: ""
 
     }
     componentDidMount() {
-        this.Search(this.state.query)
+        // this.Search(this.state.query)
     }
 
 
@@ -31,7 +31,7 @@ class SearchPage extends Component {
                 { result: [...res.data.items] }
             )
             console.log(this.state.result);
-        })
+        }).catch(err => {console.log(err)})
 
     }
 
@@ -75,7 +75,7 @@ class SearchPage extends Component {
             this.Save(res);
 
 
-        })
+        }).catch(err => {console.log(err)})
     }
 
     render() {
@@ -97,7 +97,8 @@ class SearchPage extends Component {
                         return (
 
                             <div key={book.id} className="BookCard mb-3 ml-auto mr-auto">
-                                <h1><img height="150px" width="100px" alt={book.volumeInfo.title + "cover thumbnial"} src={book.volumeInfo.imageLinks.thumbnail} />{book.volumeInfo.title}</h1>
+                                <h1><img height="150px" width="100px" alt={book.volumeInfo.title + "cover thumbnial"} src={book.volumeInfo.imageLinks.smallThumbnail} /></h1>
+                                <h1>{book.volumeInfo.title}</h1>
                                 <p className="ml-auto mr-auto">Authors:{book.volumeInfo.authors}</p>
                                 <p>Description: {book.volumeInfo.description}</p>
 
